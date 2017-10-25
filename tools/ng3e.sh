@@ -193,12 +193,12 @@ function __checkout() {
 	if [ -n "$NG3E_PKG_TAG" -a "$NG3E_PKG_TAG" = "$NG3E_PKG_VERSION" ]; then
 		ver=$(git describe --tags --always)
 		if [ "$ver" != "$NG3E_PKG_VERSION" ]; then
-			git checkout --detach "$NG3E_PKG_VERSION" || __nok "checkout failed"
+			git checkout -f --detach "$NG3E_PKG_VERSION" || __nok "checkout failed"
 		fi
 		ver=$(git describe --tags)
 		[ "$ver" != "$NG3E_PKG_VERSION" ] && __nok "tag checkout failed"
 	else
-		git checkout "$NG3E_PKG_VERSION" || __nok "checkout failed"
+		git checkout -f "$NG3E_PKG_VERSION" || __nok "checkout failed"
 	fi
 	popd
 	__inf "Checked out version (tag/branch): $NG3E_PKG_NAME:$NG3E_PKG_VERSION"
